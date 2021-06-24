@@ -1,19 +1,11 @@
-import { useState } from "react"
+import { ButtonHTMLAttributes } from 'react'; // tipagem exportada do react que possui todos os atributos que um button pode receber
 
-type ButtonProps = {
-  //text?: Array<string> // ou string[],
-  children?: string;
-}
+import '../styles/button.scss' // importar o style antes do type
+
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>; // no generics passo o elemento do botão, tipagem global 
 
 export function Button(props: ButtonProps){
-
-  const [counter, setCounter] = useState(0)
-
-  function increment(){
-    setCounter(counter + 1)
-  }
-  console.log(counter)
   return(
-    <button onClick={increment}>{counter}</button>
+    <button className="button" {...props}/> //todas as propriedades recebidas no componente
   )
 }
