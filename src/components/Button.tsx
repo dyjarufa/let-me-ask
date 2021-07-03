@@ -6,6 +6,6 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>; // no generics passo
 
 export function Button(props: ButtonProps){
   return(
-    <button className="button" {...props}/> //todas as propriedades recebidas no componente
+    <button className="button" {...props}/> //pegando todas as propriedades recebidas no componente Button e passando para o elmento html <button>
   )
 }

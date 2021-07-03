@@ -1,0 +1,20 @@
+{
+  "rules": {
+    "rooms": {
+      ".read": false,
+      ".write": "auth != null", //só pode criar/editar uma sala se estiver autenticado
+      "$roomId": { //$ representa uma sala específica
+        ".read": true, // permite a leitura
+        ".write": "auth != null && (!data.exists() || data.child('authorId').val() == auth.id)", // precisa estar autenticado / && (não deve existir nenhuma sala no momento da criação || data.child(significa que procuro os dados desta sala, procuro o campo authorId. o autor que criou esta sala == id do autor autenticado) )
+        "questions": { // dentro de cada sala vamos ter um propriedade question que são as perguntas daquela sala
+          ".read": true, // qualquer um pode ler as perguntas da sala
+          ".write": "auth != null && (!data.exists() || data.parent().child('authorId').val() == auth.id)", // a pergunta precisar ter sido criada pela pessoa que está editando ela / data.parent()  voltou para o nível $roomId que é a pessoa que CRIOU a SALA e NÃO quem CRIOU AQUELA PERGUNTA exatamente
+          "likes": {
+            ".read": true,
+            ".write": "auth != null && (!data.exists() || data.child('authorId').val() == auth.id)",  // para editar o like precisa ser do autor que o criou
+          }
+        }
+      }
+    }
+  }
+}
