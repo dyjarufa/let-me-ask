@@ -86,6 +86,7 @@ export function Room(){
             </Button>  
           </div>
         </form>
+        {JSON.stringify(questions)}
       </main>
     </div>
   )

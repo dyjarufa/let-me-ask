@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes } from 'react'; // tipagem exportada do react que possui todos os atributos que um button pode receber
 
-import '../styles/button.scss' // importar o style antes do type
+import './styles.scss'; // importar o style antes do type
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>; // no generics passo o elemento do botão, tipagem global 
 
