@@ -16,7 +16,7 @@ type RoomParams = {
   id: string;
 }
 
-export function Room(){
+export function AdminRoom(){
   //Consigo recuperar os parâmtros da rota da minha página(App.tsx) com o useParams.
   const { user } = useAuth();
   const params = useParams<RoomParams>();

@@ -1,3 +1,5 @@
+import './styles.scss'
+
 type QuestionsProps = {
   content: string,
   author: {
@@ -7,7 +9,7 @@ type QuestionsProps = {
 }
 
 //export function Questions(props: QuestionsProps)
-export function Questions({ //desestruturar a tipagem
+export function Question({ //desestruturar a tipagem
   content,
   author,
 }: QuestionsProps) {
