@@ -15,8 +15,15 @@
 
   transition: filter 0.2s;
 
+  
   img{
     margin-right: 8px;
+  }
+
+  &.outlined {
+    background: #FFF;
+    border: 1px solid #835afd;
+    color: #835afd;
   }
 
   &:not(:disabled):hover{ //quando não estiver disabled, e receber o hover, aplica o filter
