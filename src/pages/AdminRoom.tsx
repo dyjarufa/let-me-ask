@@ -1,7 +1,9 @@
-import { useParams } from 'react-router'; 
+import { useParams } from 'react-router';
 
 import logoImg from '../assets/images/logo.svg';
 import deleteImg from '../assets/images/delete.svg';
+import checkImg from '../assets/images/check.svg';
+import answerImg from '../assets/images/answer.svg';
 
 import { Button } from '../components/Button';
 import { Question } from '../components/Question';
@@ -17,7 +19,7 @@ type RoomParams = {
   id: string;
 }
 
-export function AdminRoom(){
+export function AdminRoom() {
   //Consigo recuperar os parâmtros da rota da minha página(App.tsx) com o useParams.
   // const { user } = useAuth();
   const params = useParams<RoomParams>();
@@ -34,21 +36,34 @@ export function AdminRoom(){
   }
 
 
-  async function handleDeleteQuestion(questionId: string){
-      if(window.confirm('would you like to remove the question?')){ //window.confirm (método nativo do javascript)
-        await database.ref(`/rooms/${roomId}/questions/${questionId}`).remove();
-    }
+  async function handleDeleteQuestion(questionId: string) {
 
+    if (window.confirm('would you like to remove the question?')) { //window.confirm (método nativo do javascript)
+      await database.ref(`/rooms/${roomId}/questions/${questionId}`).remove();
+    }
   }
 
-  
-  return(
-    <div id="page-room"> 
+
+  async function handleCheckQuestionAsAnswered(questionId: string) {
+    await database.ref(`/rooms/${roomId}/questions/${questionId}`).update({
+      isAnswered: true,
+    });
+  }
+
+  async function handleHighLightQuestion(questionId: string) {
+    await database.ref(`/rooms/${roomId}/questions/${questionId}`).update({
+      isHighlighted: true,
+    });
+  }
+
+
+  return (
+    <div id="page-room">
       <header>
         <div className="content">
           <img src={logoImg} alt="letmeask" />
           <div>
-            <RoomCode code={roomId}/>
+            <RoomCode code={roomId} />
             <Button isOutlined onClick={handleEndRoom}>
               Close Room
             </Button>
@@ -63,18 +78,37 @@ export function AdminRoom(){
         </div>
         <div className="question-list">
           {questions.map(question => {
-            return(
-              <Question 
+            return (
+              <Question
                 key={question.id}
                 content={question.content}
                 author={question.author}
+                isHighlighted={question.isHighlighted}
+                isAnswered={question.isAnswered}
               >
+                {!question.isAnswered && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => handleCheckQuestionAsAnswered(question.id)}
+                    >
+                      <img src={checkImg} alt="mark a question as answered" />
+                    </button>
+
+                  <button
+                    type="button"
+                    onClick={() => handleHighLightQuestion(question.id)}
+                  >
+                    <img src={answerImg} alt="highlight a question" />
+                  </button>
+                </>
+                )}
                 <button
                   type="button"
-                  onClick={()=> handleDeleteQuestion(question.id)}
+                  onClick={() => handleDeleteQuestion(question.id)}
                 >
                   <img src={deleteImg} alt="remove question" />
-                </button> 
+                </button>
               </Question>
             )
           })}
