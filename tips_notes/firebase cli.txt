@@ -1,0 +1,30 @@
+As configurações da cada plataforma pode ser encontrada na documentação do create react app
+===========================================================================================
+
+- No painel do meu projeto no firebase ir na opção:
+  # hosting
+
+- Instalação global pela o yarn (validar se a var de ambiente do yarn esta configurada: .bash , .zshrs , etc...)
+  yarn global firebase-tools
+
+- Criar aquivo de configuração do firebase formato json
+  firebase init
+  (caso um erro de autenticação ocorra, execute firebase login)
+
+- features a ser escolhidas:
+  realtime database...
+  hosting...(primeira opção)
+  
+  ...Após selecionar as opções acima, "Enter"
+
+  use an exist project...
+  ...escolher meu projeto
+
+  What do you want to use as your public directory? build(escrever essa opção)
+
+  - Rodar o comando yarn build, será gerada um pasta build, com as versão estática, contendo apenas html, css e js
+
+  - Para fazer o deploy:
+    fire base deploy
+
+
